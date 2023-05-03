@@ -1,0 +1,16 @@
+# curl -X 'GET'
+#  'http://localhost:8080/cats-facts'
+#  -H 'accept: */*'
+#  -H 'X-B3-TraceId: 80f198ee56343ba864fe8b2a57d3eff7'
+#  -H 'X-B3-SpanId: e457b5a2e4d86bd1'
+#  -H 'X-B3-ParentSpanId: e457b5a2e4d86bd1'
+#  -H 'baggage: cid=test12345'
+GET http://localhost:8080/cats-facts
+accept: */*
+X-B3-TraceId: 80f198ee56343ba864fe8b2a57d3eff7
+X-B3-SpanId: e457b5a2e4d86bd1
+X-B3-ParentSpanId: e457b5a2e4d86bd1
+baggage: cid=test12345
+
+###
+
