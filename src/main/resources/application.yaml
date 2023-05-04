@@ -2,21 +2,20 @@ spring:
   application:
     name: Tracing Example
 
-  management:
-    tracing:
+management:
+  tracing:
+    enabled: true
+    propagation:
+      type: b3
+    sampling:
+      probability: 1.0
+    baggage:
       enabled: true
-      propagation:
-        type: b3,w3c
-      sampling:
-        probability: 1.0
-      baggage:
-        enabled: true
-        remote-fields:
+      remote-fields:
+        - baggage
+      correlation:
+        fields:
           - baggage
-        correlation:
-          fields:
-            - baggage
-
 logging:
   pattern:
     level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"

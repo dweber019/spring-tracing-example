@@ -1,11 +1,11 @@
 package ch.basler.experimental.tracingexample;
 
-import brave.propagation.B3Propagation;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.parameters.Parameter;
+import java.util.Set;
 import org.springdoc.core.customizers.OperationCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ public class OpenApiConfig {
   @Bean
   public OperationCustomizer customGlobalHeaders() {
     return (Operation operation, HandlerMethod handlerMethod) -> {
-      B3Propagation.get().keys().forEach(header -> {
+      Set.of("b3", "X-B3-TraceId", "X-B3-SpanId", "X-B3-ParentSpanId", "X-B3-Sampled").forEach(header -> {
         Parameter parameter = new Parameter().in(ParameterIn.HEADER.toString()).schema(new StringSchema())
             .name(header).description("Specification at https://github.com/openzipkin/b3-propagation");
         operation.addParametersItem(parameter);
